@@ -10,20 +10,20 @@
 | -------------------- | ---------- | ------------------------------ |
 | nick_name            | string     | null: false                    |
 | email                | string     | null: false, uniqueness: true  |
-| encrypted_password   | string     | null: false, uniqueness: true  |
+| encrypted_password   | string     | null: false,                   |
 | family_name          | string     | null: false                    |
 | first_name           | string     | null: false                    |
 | family_name_ruby     | string     | null: false                    |
 | first_name_ruby      | string     | null: false                    |
-| birth_date           | string     | null: false                    |
+| birth_date           | date       | null: false                    |
 
 ###　Association
 
-- has_many :purchases
+- has_many :purchased_lists
 - has_many :items
 - has_many :comments
 
-## purchasesテーブル
+## purchasersテーブル
 
 | Column               | Type       | Options                        |
 | -------------------- | ---------- | ------------------------------ |
@@ -31,16 +31,16 @@
 | city                 | string     | null: false,                   |
 | street               | string     | null: false                    |
 | street_address       | string     | null: false                    |
-| building             | string     | null: false                    |
+| building             | string     |                                |
 | phone_number         | string     | null: false                    |
 | user                 | references | null: false, foreign_key: true |
 | item                 | references | null: false, foreign_key: true |
+| purchased_list       | references | null: false, foreign_key: true |
 | prefecture_id        | integer    | null: false,                   |
 
 ###　Association
 
 - belongs_to :user
-- belongs_to :item
 #### extend ActiveHash::Associations::ActiveRecordExtensions
 - belongs_to :prefecture
 
@@ -62,13 +62,28 @@
 
 - belongs_to :user
 - has_many   :comments
-- has_one    :purchase
+- has_one    :purchased_list
 #### extend ActiveHash::Associations::ActiveRecordExtensions
 - belongs_to :prefecture
 - belongs_to :category
 - belongs_to :condition
 - belongs_to :shipping_method
 - belongs_to :shipping_time
+
+## purchased_listテーブル
+
+| Column               | Type       | Options                        |
+| -------------------- | ---------- | ------------------------------ |
+| user                 | references | null: false, foreign_key: true |
+| item                 | references | null: false, foreign_key: true |
+
+
+###　Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one    :purchaser
+
 
 ## commentsテーブル
 
