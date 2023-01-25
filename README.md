@@ -30,17 +30,15 @@
 | postal_code          | string     | null: false                    |
 | city                 | string     | null: false,                   |
 | street               | string     | null: false                    |
-| street_address       | string     | null: false                    |
 | building             | string     |                                |
 | phone_number         | string     | null: false                    |
-| user                 | references | null: false, foreign_key: true |
-| item                 | references | null: false, foreign_key: true |
 | purchased_list       | references | null: false, foreign_key: true |
 | prefecture_id        | integer    | null: false,                   |
 
 ###　Association
 
-- belongs_to :user
+- belongs_to :purchased_list
+
 #### extend ActiveHash::Associations::ActiveRecordExtensions
 - belongs_to :prefecture
 
@@ -83,7 +81,6 @@
 - belongs_to :user
 - belongs_to :item
 - has_one    :purchaser
-
 
 ## commentsテーブル
 
