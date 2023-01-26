@@ -53,6 +53,11 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
+      it "passwordに全角文字が含まれるときは登録できない" do
+        @user.password = "1２３４ab"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
       it "passwordが5文字以下では登録できない" do
         @user.password = "a1234"
         @user.password_confirmation = "a1234"
@@ -95,13 +100,18 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Family name is invalid")
       end
-      it "family_nameは英字は登録は登録できない" do
+      it "family_nameは英字は登録できない" do
         @user.family_name = "tanaka"
         @user.valid?
         expect(@user.errors.full_messages).to include("Family name is invalid")
       end
-      it "family_nameは数字は登録は登録できない" do
+      it "family_nameは数字は登録できない" do
         @user.family_name = "111111"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name is invalid")
+      end
+      it "family_nameに半角文字が含まれるときは登録できない" do
+        @user.family_name = "ﾀﾅｶ"
         @user.valid?
         expect(@user.errors.full_messages).to include("Family name is invalid")
       end
@@ -115,15 +125,30 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name is invalid")
       end
-      it "first_nameは英字は登録は登録できない" do
+      it "first_nameは英字は登録できない" do
         @user.first_name = "tanaka"
         @user.valid?
         expect(@user.errors.full_messages).to include("First name is invalid")
       end
-      it "first_nameは数字は登録は登録できない" do
+      it "first_nameは数字は登録できない" do
         @user.first_name = "111111"
         @user.valid?
         expect(@user.errors.full_messages).to include("First name is invalid")
+      end
+      it "first_nameに半角文字が含まれるときは登録できない" do
+        @user.first_name = "ﾀﾛｳ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name is invalid")
+      end
+      it "family_name_rubyに半角文字が含まれるときは登録できない" do
+        @user.family_name_ruby = "ﾀﾅｶ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name ruby is invalid")
+      end
+      it "first_name_rubyに半角文字が含まれるときは登録できない" do
+        @user.first_name_ruby = "ﾀﾛｳ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name ruby is invalid")
       end
     end
   end
