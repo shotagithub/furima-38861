@@ -4,8 +4,8 @@ function itemCalc (){
   const itemSum = document.getElementById("profit");
 
   price.addEventListener("input", () => {    
-    fee.innerHTML = Math.round(price.value * 0.1);    
-    itemSum.innerHTML = Math.round(price.value * 0.9);
+    fee.innerHTML = Math.floor(price.value * 0.1);    
+    itemSum.innerHTML = Math.floor(price.value * 0.9);
  })
 };
 
