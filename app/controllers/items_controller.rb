@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    return if user_signed_in? && current_user.id == @item.user.id
+    return if user_signed_in? && current_user.id == @item.user.id && @item.purchased_list == nil
 
     redirect_to root_path
   end
