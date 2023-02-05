@@ -15,4 +15,8 @@ class User < ApplicationRecord
   validates :family_name_ruby, presence: true, format: { with: VALID_RUBY_REGEX }
   validates :first_name_ruby, presence: true, format: { with: VALID_RUBY_REGEX }
   validates :birth_date, presence: true
+
+  # Association
+  has_many :purchased_lists
+  has_many :items
 end

@@ -71,6 +71,11 @@ RSpec.describe PurchasedListPurchaser, type: :model do
         @purchased_list_purchaser.valid?
         expect(@purchased_list_purchaser.errors.full_messages).to include ("Phone number is invalid")
       end
+      it '電話番号が9桁以下では保存できない' do
+        @purchased_list_purchaser.phone_number = 111222333
+        @purchased_list_purchaser.valid?
+        expect(@purchased_list_purchaser.errors.full_messages).to include ("Phone number is invalid")
+      end
       it 'トークンが空だと保存できない' do
         @purchased_list_purchaser.token = ""
         @purchased_list_purchaser.valid?
