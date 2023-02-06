@@ -127,7 +127,7 @@
     </div>
     <ul class='item-lists'>
 
-    <% if @item != nil %>
+    <% if @item.present? %>
       <% @item.each do |item| %> 
       <li class='list'>         
         <%= link_to item_path(item.id) do %>
