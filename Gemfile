@@ -61,7 +61,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Production environment
 group :production do
-  gem 'pg'
   gem 'unicorn', '5.4.1'
 end
 
